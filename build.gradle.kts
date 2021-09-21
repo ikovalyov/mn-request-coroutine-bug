@@ -24,6 +24,7 @@ micronaut {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
@@ -58,5 +59,11 @@ tasks {
         }
     }
 
-
+    withType<Test> {
+        useJUnitPlatform {
+            includeEngines = setOf("junit-jupiter", "junit-vintage")
+        }
+        reports.html.isEnabled = false
+        reports.junitXml.isEnabled = true
+    }
 }
